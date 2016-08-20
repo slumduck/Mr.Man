@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>书签网</title>
+<head>
+<link rel="stylesheet" href="css/frame.css"/>
+<link rel="shortcut icon" type="image/x-icon" href="images/logo/favicon.ico">
+</head>
+
+<body>
+<!--
+    作者：334176612@qq.com
+    时间：2016-0-17 23:09:34
+    描述：顶部
+-->
+<div class="top">
+
+	 <span class="title"></span>
+	 <div class="day">
+           <span class="hour">11</span>
+           <span class="twinkle">:</span>
+           <span class="minute">33</span>
+           <span class="date">
+           	星期三
+           	<br />
+           	2016/8/17
+           </span>
+      </div>
+	  <ul class="topMenu" style="color: #fff;">
+			<li id="tohome" ><a href="index.html"><span class="iconall icon7"></span><label>返回主页</label></a></li>
+			<li id="system"><span class="iconall icon"></span><label>系统设置</label></li>
+	        <li id="passWord"><span class="iconall icon6"></span><label>修改密码</label></li>
+			<li id="logout"><a href="#"><span class="iconall icon9"></span><label>退出系统</label></a></li>
+	  </ul>
+</div>
+<!--
+    作者：334176612@qq.com
+    时间：2016-08-17 23:09:34
+    描述：body
+-->
+<div class="container">
+	<!-- 导航条 -->
+	<div class="left">
+		<div class="line"></div>
+    </div>
+    
+    <!-- frame -->
+    <div class="right">
+    	<div class="rightDiv rightDiv2" id="rightDiv">
+			<iframe name="main" src="welcome.html" frameborder="0"></iframe>
+		</div>
+    </div>
+    <!-- 遮罩层-->
+    <div id='froverlay' class='ui-widget-overlay ui-front'></div>
+	<div id='frloading' class='frloading'></div>
+</div>
+<!--
+    作者：334176612@qq.com
+    时间：2016-08-17 23:09:34
+    描述：底部
+-->
+<div class="footer">
+	<span class="iconall icon6"></span><label>当前用户：</label><label id="curuser"></label>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="application/javascript" src="js/common/common.js"></script>
+<script type="application/javascript" src="js/frame.js"></script>
