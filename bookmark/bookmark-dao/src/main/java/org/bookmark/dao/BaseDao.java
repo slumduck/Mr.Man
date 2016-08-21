@@ -16,43 +16,20 @@ public interface BaseDao<T> {
 	 */
 	T findOne(Serializable id);
 	/**
-	 * select by entity
-	 * @param t
-	 * @return
-	 */
-	T findOne(T t);
-	/**
 	 * select data all class equal T.class 
 	 * @return
 	 */
 	List<T> findAll();
 	/**
-	 * delete by primary key
-	 * @param id
-	 * @return
-	 */
-	Serializable deleteOne(Serializable id);
-	/**
 	 * delete by entity
 	 * @param t
 	 * @return
 	 */
-	Serializable deleteOne(T t);
-	/**
-	 * delete by your idea
-	 * @return
-	 */
-	Serializable delete();
-	/**
-	 * update data by entity
-	 * @param t
-	 * @return
-	 */
-	Serializable updateOne(T t);
+	void delete(T t);
 	/**
 	 * 
 	 * @param t
 	 * @return
 	 */
-	Serializable update(T t);
+	T update(T t);
 }

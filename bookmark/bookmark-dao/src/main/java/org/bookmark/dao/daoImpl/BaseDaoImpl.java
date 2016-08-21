@@ -19,6 +19,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 	private Class<T> entityClass;
 	protected EntityManager entityManage;
+	
 	@SuppressWarnings("unchecked")
 	public BaseDaoImpl(){
 		Type type = entityClass.getGenericSuperclass();
@@ -29,42 +30,25 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 	@Override
 	public T findOne(Serializable id) {
-		return null;
+		return entityManage.find(entityClass, id);
 	}
 
-	@Override
-	public T findOne(T t) {
-		return null;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findAll() {
-		return null;
+		String qlString = "from " + entityClass.getSimpleName();
+		List<T> list = (List<T>) entityManage.createQuery(qlString);
+		return list;
 	}
 
 	@Override
-	public Serializable deleteOne(Serializable id) {
-		return null;
+	public void delete(T t) {
+		 entityManage.remove(t);
 	}
 
 	@Override
-	public Serializable deleteOne(T t) {
-		return null;
-	}
-
-	@Override
-	public Serializable delete() {
-		return null;
-	}
-
-	@Override
-	public Serializable updateOne(T t) {
-		return null;
-	}
-
-	@Override
-	public Serializable update(T t) {
-		return null;
+	public T update(T t) {
+		return entityManage.merge(t);
 	}
 
 }

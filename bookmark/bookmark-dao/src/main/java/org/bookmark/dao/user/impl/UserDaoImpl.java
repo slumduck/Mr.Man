@@ -8,4 +8,5 @@ import org.bookmark.dao.user.UserDao;
  */
 public class UserDaoImpl<T> extends BaseDaoImpl<T> implements UserDao<T> {
 
+	
 }
