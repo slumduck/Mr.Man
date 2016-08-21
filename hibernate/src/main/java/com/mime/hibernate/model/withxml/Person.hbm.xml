@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mime.hibernate.model.withxml">
+	<class name="Person" table="Person">
+		<composite-id name="personPk" class="com.mime.hibernate.model.withxml.PersonPK">
+			<key-property name="id"></key-property>
+			<key-property name="name"></key-property>
+		</composite-id>
+		
+		<property name="sex" type="java.lang.String" column="sex" />
+		<property name="birthday" type="java.util.Date" column="birthday" />
+		<property name="high" column="high" />
+	</class>
+</hibernate-mapping>

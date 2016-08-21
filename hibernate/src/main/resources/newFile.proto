@@ -1,0 +1,9 @@
+syntax = "proto2";
+//package com.google.protobuf.demo;
+option java_package = "org.google.protobuf.demo";
+option java_outer_classname = "PersonDemo";
+message Person{
+	repeated string name =1;
+	repeated int32 id_Card = 2;
+	repeated string id = 3;
+}

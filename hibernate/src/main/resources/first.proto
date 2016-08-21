@@ -1,0 +1,10 @@
+syntax = "proto2";
+
+option java_package = "hh.mm.nn";
+option java_outer_classname = "MessageA";
+message Message_A{
+	required  int32 id=1;
+	required string sex= 2;
+	required int32 age=3;
+
+}
