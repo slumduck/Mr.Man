@@ -69,6 +69,4 @@ public class Bk_Navigation_Dl {
 	public void setBk_roles(Set<Bk_Role> bk_roles) {
 		this.bk_roles = bk_roles;
 	}
-	
-	
 }
