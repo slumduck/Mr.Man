@@ -1,4 +1,4 @@
-package com.zl.bookmark.repository;
+package com.zl.bookmark.dao.repository;
 
 import java.io.Serializable;
 

@@ -14,7 +14,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:component-scan base-package="com.zl.bookmark" />
+	<context:component-scan base-package="com.zl.bookmark.dao" />
 	<aop:config proxy-target-class="true" />
 	<context:property-placeholder location="classpath*:jdbc.properties"/>
 	<!-- jndi -->
@@ -48,12 +48,12 @@
 	                             3.create-if-not-found (default)：如果方法通过 @Query 指定了查询语句，则使用该语句创建查询；如果没有，则查找是否定义了符合条件的Named Query，如果找到，则使用该Named Query；
 	                                                        如果两者都没有找到，则通过解析方法名字来创建Query。
 	-->
-	<jpa:repositories base-package="com.zl.bookmark.repository" 
+	<jpa:repositories base-package="com.zl.bookmark.dao.repository" 
 	                  query-lookup-strategy="create-if-not-found" ></jpa:repositories>
 	<!-- 启用所有自定以的Respository扩展 
 	         注：上层接口UserSelect 实现了Respository,自定义实现类必须UserSelectImpl....命名规范
 	-->
-	<jpa:repositories base-package="com.zl.bookmark" repository-impl-postfix="Impl" />
+	<jpa:repositories base-package="com.zl.bookmark.dao" repository-impl-postfix="Impl" />
 
 	<!-- 配置该注解后可以使用ejb注解
 	       @PersistenceUnit()：用于注解entityManagerFactory、
@@ -63,7 +63,7 @@
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="packagesToScan" value="com.zl.bookmark"/>
+		<property name="packagesToScan" value="com.zl.bookmark.dao"/>
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">

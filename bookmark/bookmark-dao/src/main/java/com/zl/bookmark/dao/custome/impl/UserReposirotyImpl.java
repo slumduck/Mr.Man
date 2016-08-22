@@ -1,9 +1,9 @@
-package com.zl.bookmark.dao.Impl;
+package com.zl.bookmark.dao.custome.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.zl.bookmark.dao.UserReposirotyCustome;
+import com.zl.bookmark.dao.custome.UserReposirotyCustome;
 import com.zl.bookmark.entity.user.Bk_User;
 
 /** 

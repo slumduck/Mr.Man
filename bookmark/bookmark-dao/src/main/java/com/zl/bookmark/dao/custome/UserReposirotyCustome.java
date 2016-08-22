@@ -1,4 +1,4 @@
-package com.zl.bookmark.dao;
+package com.zl.bookmark.dao.custome;
 /** 
  * @author wt0911 zl  
  */

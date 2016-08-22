@@ -1,4 +1,4 @@
-package com.zl.bookmark.repository;
+package com.zl.bookmark.dao.repository;
 
 import java.io.Serializable;
 
@@ -11,7 +11,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.Repository;
 
-import com.zl.bookmark.dao.UserReposirotyCustome;
+import com.zl.bookmark.dao.custome.UserReposirotyCustome;
 import com.zl.bookmark.entity.user.Bk_User;
 
 /** 

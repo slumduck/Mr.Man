@@ -1,4 +1,4 @@
-package com.zl.bookmark.repository.Impl;
+package com.zl.bookmark.dao.repository.impl;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
-import com.zl.bookmark.repository.BaseRepository;
+import com.zl.bookmark.dao.repository.BaseRepository;
 
 /** 
  * @author wt0911 zl  
