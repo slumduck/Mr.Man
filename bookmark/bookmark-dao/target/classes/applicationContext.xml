@@ -50,8 +50,8 @@
 	-->
 	<jpa:repositories base-package="com.zl.bookmark.repository" 
 	                  query-lookup-strategy="create-if-not-found" ></jpa:repositories>
-	<!-- 启用所有自定以的注解 
-	         注：上层接口UserSelect,自定义实现类必须UserSelectImpl....命名规范
+	<!-- 启用所有自定以的Respository扩展 
+	         注：上层接口UserSelect 实现了Respository,自定义实现类必须UserSelectImpl....命名规范
 	-->
 	<jpa:repositories base-package="com.zl.bookmark" repository-impl-postfix="Impl" />
 
