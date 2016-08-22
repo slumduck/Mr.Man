@@ -49,6 +49,7 @@
 		<mysql.version>5.1.37</mysql.version>
 		<!-- veloctiy -->
 		<velocity.version>1.6.4</velocity.version>
+		<c3p0.version>0.9.1.2</c3p0.version>
 	</properties>
 	<dependencyManagement>
 
@@ -219,6 +220,11 @@
 				<artifactId>javax.servlet-api</artifactId>
 				<version>${servlet.version}</version>
 				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>c3p0</groupId>
+				<artifactId>c3p0</artifactId>
+				<version>${c3p0.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

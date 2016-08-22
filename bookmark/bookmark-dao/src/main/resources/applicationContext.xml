@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="com.zl.bookmark" />
+	<aop:config proxy-target-class="true" />
+	<context:property-placeholder location="classpath*:jdbc.properties"/>
+	<!-- jndi -->
+	<!--  
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="resourceRef">
+			<value>true</value>
+		</property>
+		<property name="jndiName">
+			<value>jdbc/maeipuser</value>
+		</property>
+	</bean>
+    -->
+    <!-- develop model dataSource -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.dl.url}" />
+		<property name="user" value="${jdbc.dl.username}" />
+		<property name="password" value="${jdbc.dl.password}" />
+	</bean>
+	<!-- jdbcTemplate spring简单封装的jdbc -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- Spring Data JPA 
+	     Spring会在” base-package”中定义的package和其子package中搜寻继承了Repository的接口
+	     springDate创建query的策略：
+	                             1.create：只通过解析方法名来创建Query。忽略@Query和NamedQuery方法。
+	                             2.use-declared-query：如果没有，则查找是否定义了符合条件的Named Query，如果找到，则使用该命名查询；
+	                                                        如果两者都没有找到，则抛出异常。
+	                             3.create-if-not-found (default)：如果方法通过 @Query 指定了查询语句，则使用该语句创建查询；如果没有，则查找是否定义了符合条件的Named Query，如果找到，则使用该Named Query；
+	                                                        如果两者都没有找到，则通过解析方法名字来创建Query。
+	-->
+	<jpa:repositories base-package="com.zl.bookmark.repository" 
+	                  query-lookup-strategy="create-if-not-found" ></jpa:repositories>
+	<!-- 启用所有自定以的注解 
+	         注：上层接口UserSelect,自定义实现类必须UserSelectImpl....命名规范
+	-->
+	<jpa:repositories base-package="com.zl.bookmark" repository-impl-postfix="Impl" />
+
+	<!-- 配置该注解后可以使用ejb注解
+	       @PersistenceUnit()：用于注解entityManagerFactory、
+	       @PersistenceContext：用于注解entityManage 
+	-->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="packagesToScan" value="com.zl.bookmark"/>
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="true" />
+				<!-- <property name="database" value="ORACLE" /> -->
+				<property name="database" value="MYSQL" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
+		  <props>
+		    <prop key="javax.persistence.validation.mode">none</prop>
+            <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+            <prop key="hibernate.hbm2ddl.auto">update</prop>
+          </props>
+		</property>
+		<property name="jpaDialect">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+		</property>
+	</bean>
+    <!-- blob、clob设置 -->
+	<bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+	<!-- JPA Transaction -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+</beans>

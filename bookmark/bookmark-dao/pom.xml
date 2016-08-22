@@ -60,6 +60,10 @@
 			<artifactId>spring-aspects</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.zl</groupId>
 			<artifactId>bookmark-aentiy</artifactId>
 			<version>${project.version}</version>
