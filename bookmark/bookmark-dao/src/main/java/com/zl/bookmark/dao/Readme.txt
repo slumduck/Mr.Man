@@ -1,0 +1,2 @@
+repository包下定义了实现了springData的Respository的上层接口
+customer包下定义了对相应repository包下的接口的相关扩展
