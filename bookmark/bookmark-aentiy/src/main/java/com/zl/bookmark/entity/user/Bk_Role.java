@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  * 角色
@@ -21,8 +22,12 @@ import org.hibernate.annotations.GenericGenerator;
  */
 
 @Entity
-public class Bk_Role {
+public class Bk_Role implements GrantedAuthority{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GenericGenerator(name = "sys_uuid", strategy = "uuid2")
 	@GeneratedValue(generator = "sys_uuid")
@@ -41,9 +46,11 @@ public class Bk_Role {
 			@JoinColumn(name = "role_navigation_role_id")}, inverseJoinColumns = {
 					@JoinColumn(name = "role_navigation_dl_id")})
 	private Set<Bk_Navigation_Dl> bk_navigation_dls = new HashSet<Bk_Navigation_Dl>();
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,
+			CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinTable(name = "bk_role_navigation_dd", joinColumns = {
 			@JoinColumn(name = "role_navigation_role_id")}, inverseJoinColumns = {
-					@JoinColumn(name = "role_natigation_dd_id")})
+					@JoinColumn(name = "role_navigation_dd_id")})
 	private Set<Bk_Navigation_Dd> bk_navigation_dds = new HashSet<Bk_Navigation_Dd>();
 	
 	public String getRole_id() {
@@ -93,6 +100,10 @@ public class Bk_Role {
 	}
 	public void setBk_navigation_dds(Set<Bk_Navigation_Dd> bk_navigation_dds) {
 		this.bk_navigation_dds = bk_navigation_dds;
+	}
+	@Override
+	public String getAuthority() {
+		return role_type;
 	}
 	
 }

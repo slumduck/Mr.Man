@@ -1,6 +1,6 @@
 package org.bookmark.dao.user.impl;
 
-import org.bookmark.dao.daoImpl.BaseDaoImpl;
+import org.bookmark.dao.Impl.BaseDaoImpl;
 import org.bookmark.dao.user.UserDao;
 
 /** 

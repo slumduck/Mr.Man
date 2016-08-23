@@ -19,9 +19,7 @@ public class BaseRepositoryImpl<T,ID extends Serializable> extends SimpleJpaRepo
 	public BaseRepositoryImpl(Class<T> domainClass, EntityManager em) {
 		super(domainClass, em);
 	}
-
-	@Override
-	public Page<T> findAll(Specification<T> spec, Pageable pageable) {
-		return super.findAll(spec, pageable);
-	}
+	/**
+	 * 定义全局的 自定义方法或其他
+	 */
 }

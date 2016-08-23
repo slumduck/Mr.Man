@@ -1,4 +1,4 @@
-package org.bookmark.dao.daoImpl;
+package org.bookmark.dao.Impl;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;

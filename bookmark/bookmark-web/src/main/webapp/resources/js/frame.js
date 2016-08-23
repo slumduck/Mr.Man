@@ -24,7 +24,7 @@
  */
 var staticImitate = [
 //system_log
-{dl_class:"system_log",dt_backgroud_image:"images/left/system.png",dt_description:"系统记录",
+{dl_class:"system_log",dt_backgroud_image:"resources/images/left/system.png",dt_description:"系统记录",
   dl_dd: 
   [{dd_a_href:"welcome.html",dd_a_description:"充值记录",dd_target:"main",dd_index:1},
    {dd_a_href:"welcome.html",dd_a_description:"短信充值记录",dd_target:"main",dd_index:0},
@@ -34,7 +34,7 @@ var staticImitate = [
   dl_index:7
 },
 //custom
-{dl_class:"custom",dt_backgroud_image:"images/left/custom.png",dt_description:"客户管理",
+{dl_class:"custom",dt_backgroud_image:"resources/images/left/custom.png",dt_description:"客户管理",
    dl_dd:
    [{dd_a_href:"welcome.html",dd_a_description:"客户管理",dd_target:"main",dd_index:0},
     {dd_a_href:"welcome.html",dd_a_description:"试用/成交客户管理",dd_target:"main",dd_index:1},
@@ -44,7 +44,7 @@ var staticImitate = [
    dl_index:3
 },
 //channel
-{dl_class:"channel",dt_backgroud_image:"images/left/channel.png",dt_description:"渠道管理",
+{dl_class:"channel",dt_backgroud_image:"resources/images/left/channel.png",dt_description:"渠道管理",
    dl_dd:
    [{dd_a_href:"welcome.html",dd_a_description:"渠道主页",dd_target:"main",dd_index:0},
     {dd_a_href:"welcome.html",dd_a_description:"渠道标准管理",dd_target:"main",dd_index:1},
@@ -54,7 +54,7 @@ var staticImitate = [
    dl_index:5
 },
 //app
-{dl_class:"app",dt_backgroud_image:"images/left/app.png",dt_description:"APP管理",
+{dl_class:"app",dt_backgroud_image:"resources/images/left/app.png",dt_description:"APP管理",
    dl_dd:
    [{dd_a_href:"welcome.html",dd_a_description:"App运营商管理",dd_target:"main",dd_index:0},
     {dd_a_href:"welcome.html",dd_a_description:"开放接口管理",dd_target:"main",dd_index:1},
@@ -63,13 +63,13 @@ var staticImitate = [
    dl_index:4
 },
 //cloud
-{dl_class:"cloud",dt_backgroud_image:"images/left/cloud.png",dt_description:"大数据云平台",
+{dl_class:"cloud",dt_backgroud_image:"resources/images/left/cloud.png",dt_description:"大数据云平台",
    dl_dd:
    [{dd_a_href:"welcome.html",dd_a_description:"平台运营商管理",dd_target:"main",dd_index:0}],
    dl_index:2
 },
 //syetem_management
-{dl_class:"syetem_management",dt_backgroud_image:"images/left/syetem_management.png",dt_description:"系统管理",
+{dl_class:"syetem_management",dt_backgroud_image:"resources/images/left/syetem_management.png",dt_description:"系统管理",
    dl_dd:
    [{dd_a_href:"welcome.html",dd_a_description:"后台用户管理",dd_target:"main",dd_index:0},
     {dd_a_href:"welcome.html",dd_a_description:"角色管理",dd_target:"main",dd_index:1},
@@ -83,7 +83,7 @@ var staticImitate = [
    dl_index:6
 },
 //source
-{dl_class:"source",dt_backgroud_image:"images/left/source.png",dt_description:"素材库管理",
+{dl_class:"source",dt_backgroud_image:"resources/images/left/source.png",dt_description:"素材库管理",
    dl_dd:
    [{dd_a_href:"welcome.html",dd_a_description:"图片库",dd_target:"main",dd_index:0},
     {dd_a_href:"welcome.html",dd_a_description:"链接库",dd_target:"main",dd_index:1},
@@ -92,7 +92,7 @@ var staticImitate = [
    dl_index:1
 },
 //statistics
-{dl_class:"system_log",dt_backgroud_image:"images/left/statistics.png",dt_description:"统计分析",
+{dl_class:"system_log",dt_backgroud_image:"resources/images/left/statistics.png",dt_description:"统计分析",
    dl_dd:
    [{dd_a_href:"welcome.html",dd_a_description:"客户统计",dd_target:"main",dd_index:0}],
    dl_index:0
@@ -117,7 +117,7 @@ $(function(){
  * dt_img:设置单击时箭头的图标
  * dt_backgroudColor:设置导航的背景颜色
  */
-var dt_img = {open:"images/left/select_xl.png",close:"images/left/select_xl01.png"};
+var dt_img = {open:"resources/images/left/select_xl.png",close:"resources/images/left/select_xl01.png"};
 var dt_backgroudColor = {open:"#317eb4",close:"#3992d0"};
 var indexInit = {
 	    //为标题绑定click事件
@@ -180,7 +180,7 @@ var indexInit = {
 				                              +info.dt_description+"<img ></dt>";
 				
 				if(info.dt_backgroud_image == null || info.dt_backgroud_image == ""){
-					info.dt_backgroud_image = "images/left/system.png";
+					info.dt_backgroud_image = "resources/images/left/system.png";
 				}
 				//设置dd
 				var ddArray = [];//new Array(info.dl_dd.length);
