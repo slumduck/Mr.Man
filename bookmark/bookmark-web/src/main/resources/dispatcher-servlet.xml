@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <import resource="classpath*:dispatcher-freemark.xml"/>
+	<!--如果使用aop，注意包的加载范围，mvc先加载会导致aop配置无效 -->
+	<context:component-scan base-package="com.zl.bookmark.service" />
+	<!-- 公用配置 -->
+	<bean id="noCache"
+		class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+		<property name="cacheSeconds" value="0" />
+		<property name="useExpiresHeader" value="true" />
+		<property name="useCacheControlHeader" value="true" />
+		<property name="useCacheControlNoStore" value="true" />
+	</bean>
+	<!-- MVC配置 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+			<bean
+				class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+    
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:defaultEncoding="utf-8">
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxInMemorySize" value="4096" />
+	</bean>
+	
+	<!--  
+	<mvc:view-controller path="/" view-name="/login.html"/>
+	<mvc:redirect-view-controller redirect-url="/" path="/login.html" />
+	<mvc:status-controller status-code="" path=""/>
+	-->
+	<!-- 
+	      过滤静态资源 主要用来处理 web-inf下的静态资源  
+	      注意：配置的location一定要是webapp根目录下才行
+	      如果不是web-inf下的资源那么不需要使用这个
+	-->
+	<!--  
+	<mvc:resources location="/assets/**" mapping="/assets"></mvc:resources>
+	<mvc:resources location="/resources/css/**" mapping="/resources/css"></mvc:resources>
+	<mvc:resources location="/resources/images/**" mapping="/resources/images"></mvc:resources>
+	<mvc:resources location="/resources/js/**" mapping="/resources/js"></mvc:resources>  
+	<mvc:resources location="/login.html" mapping="/login.html"></mvc:resources>
+	<mvc:resources location="/index.html" mapping="/index.html"></mvc:resources>
+	<mvc:resources location="/welcome.html" mapping="/welcome.html"></mvc:resources>
+	<mvc:resources location="/sessionError.html" mapping="/sessionError.html"></mvc:resources>
+	-->
+	<!-- 
+	      处理webapp下面的静态资源 ,那么访问webapp下的静态资源将不在经过dispacher-servlet
+	    mvc:resources 标签同样是这样
+    -->
+	<mvc:default-servlet-handler/>
+</beans>
