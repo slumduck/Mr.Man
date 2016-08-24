@@ -19,19 +19,19 @@ import com.zl.bookmark.entity.user.Bk_User;
  */
 public class UserService implements UserDetailsService {
     private static final transient Logger log = LoggerFactory.getLogger(UserService.class);
-	//@Resource
-	//private UserRepository userRepository;
-    @Resource
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-	@SuppressWarnings("unused")
+	@Resource
+	private UserRepository userRepository;
+    //@Resource
+    //private BCryptPasswordEncoder bCryptPasswordEncoder;
+	@SuppressWarnings("null")
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-		//Bk_User bk_user = userRepository.findByUser_login_name(username);
+		Bk_User bk_user = userRepository.findByUser_login_name(username);
 		//UsernamePasswordAuthenticationFilter
-		Bk_User bk_user = new Bk_User();
-		bk_user.setUser_login_name(username);
-		bk_user.setUser_password(bCryptPasswordEncoder.encode(username));
+		//Bk_User bk_user = new Bk_User();
+		//bk_user.setUser_login_name(username);
+		//bk_user.setUser_password(bCryptPasswordEncoder.encode(username));
 		UserSecrity userSecrity = null;
 		if(bk_user != null){
 			userSecrity = new UserSecrity();

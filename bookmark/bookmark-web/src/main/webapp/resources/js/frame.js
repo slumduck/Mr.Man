@@ -92,7 +92,7 @@ var staticImitate = [
    dl_index:1
 },
 //statistics
-{dl_class:"system_log",dt_backgroud_image:"resources/images/left/statistics.png",dt_description:"统计分析",
+{dl_class:"statistics",dt_backgroud_image:"resources/images/left/statistics.png",dt_description:"统计分析",
    dl_dd:
    [{dd_a_href:"welcome.html",dd_a_description:"客户统计",dd_target:"main",dd_index:0}],
    dl_index:0
