@@ -1,5 +1,6 @@
 package com.zl.bookmark.entity.user;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ import org.springframework.security.core.GrantedAuthority;
  */
 
 @Entity
-public class Bk_Role implements GrantedAuthority{
+public class Bk_Role implements GrantedAuthority,Serializable{
 
 	/**
 	 * 

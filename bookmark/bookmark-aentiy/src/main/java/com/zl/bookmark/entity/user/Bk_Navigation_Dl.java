@@ -1,5 +1,6 @@
 package com.zl.bookmark.entity.user;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,8 +18,12 @@ import org.hibernate.annotations.GenericGenerator;
  * @author wt0911 zl  
  */
 @Entity
-public class Bk_Navigation_Dl {
+public class Bk_Navigation_Dl implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4256964190630251017L;
 	@Id
 	@GenericGenerator(name="sys_uuid",strategy="uuid2")
 	@GeneratedValue(generator="sys_uuid")

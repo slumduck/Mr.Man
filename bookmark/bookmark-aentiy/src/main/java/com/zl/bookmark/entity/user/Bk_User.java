@@ -1,5 +1,6 @@
 package com.zl.bookmark.entity.user;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +24,7 @@ import org.hibernate.validator.constraints.Email;
  * @author wt0911 zl 注：用户关联了俩张表：bk_user_level,bk_user_role
  */
 @Entity
-public class Bk_User {
+public class Bk_User implements Serializable{
 	@Id
 	@GenericGenerator(name = "sys_uuid", strategy = "uuid2")
 	@GeneratedValue(generator = "sys_uuid")
