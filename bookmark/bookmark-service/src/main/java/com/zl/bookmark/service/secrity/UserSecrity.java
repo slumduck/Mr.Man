@@ -35,22 +35,22 @@ public class UserSecrity implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return bk_user.getUser_isenabled()==0 ? true :false;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return false;
+		return bk_user.getUser_isenabled()==0 ? true :false;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return bk_user.getUser_isenabled()==0 ? true :false;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return bk_user.getUser_isenabled()==1 ? true :false;
+		return bk_user.getUser_isenabled()==0 ? true :false;
 	}
 
 	public Bk_User getBk_user() {

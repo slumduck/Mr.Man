@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationFailure implements AuthenticationFailureHandler {
 
-	private static final String defaultFailureUrl = "logout";
+	private static final String defaultFailureUrl = "/login.html";
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request,
 			HttpServletResponse response, AuthenticationException exception)

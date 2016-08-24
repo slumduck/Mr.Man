@@ -20,25 +20,74 @@
 		<intercept-url pattern="/index.html" access="isAuthenticated()" />
 		
 		<!--登陆页,及成功 失败处理 -->
-		<form-login login-page="/login.html" 
+	    <!--  
 		    authentication-success-handler-ref="authenticationSuccess"
-			authentication-failure-handler-ref="authenticationFailure" />
-		<remember-me key="bookmark" />
+			authentication-failure-handler-ref="authenticationFailure" 
+		-->
+		<form-login login-page="/login.html" 
+		    login-processing-url="/login"
+		    password-parameter="username"
+		    username-parameter="password"
+		    authentication-success-forward-url="/index.html"
+		    authentication-failure-forward-url="/login.html" />
+		<!-- cookie有效期两周 -->
+		<remember-me key="remember-me" remember-me-parameter="remember-me" token-validity-seconds="123456789"/>
         <!-- 不启用csrf，有些springSecrity版本默认启用了 -->
         <csrf disabled="true"/>
 		<logout invalidate-session="true" logout-success-url="/login.html" />
 		<!-- 处理SESSION超时 -->
 		<session-management invalid-session-url="/sessionError.html" session-authentication-error-url="/sessionError.html" />
+		<!-- 禁用X-Frame-Options 支持二级域名 -->
+		<headers>
+		    <frame-options disabled ="true"/>
+		</headers>
+		<!-- 自定义的过滤器 
+		     position:指定自定义过滤器在springSecrity过滤链中的位置（springSecrity对过滤器定义了不同的位置，按顺序执行）
+		     after：在过滤链FORM_LOGIN_FILTER位置并且优先于系统自定义的过滤器执行
+		     before：反之
+		-->
+		<!--  
+		<custom-filter ref="myFilter" after="FORM_LOGIN_FILTER" before="FORM_LOGIN_FILTER" position="FORM_LOGIN_FILTER"/>
+		-->
 	</http>
-	
-	<authentication-manager alias="authenticationManager">
+	<!-- <b:bean id = "myFilter" class = "com.zl.bookmark.MyFilter"/> -->
+	<authentication-manager alias="authenticationManager" erase-credentials="false">
 		<authentication-provider user-service-ref="userService">
 			<password-encoder ref="passwordEncoder"></password-encoder>
 		</authentication-provider>
 	</authentication-manager>
 
 	<b:bean id="userService" class="com.zl.bookmark.service.secrity.UserService" />
+	<b:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	<!-- 
+	       在验证成功、失败后，如果我们没有特殊的要求那么默认实现的过滤器就已经足够（默认实现的有好几个根据自己来选） 
+	       如果有特殊要求可以在验证成功、失败时自己进行控制分别实现下面两个接口就可以了
+	       成功：AuthenticationSuccessHandler  
+	       失败：AuthenticationFailureHandler 
+	-->
+	<!-- 这两个默认实现都是重定向 
+	<b:bean id="authenticationSuccess" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler" />
+	<b:bean id="authenticationFailure" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
+	-->
+	<!--  
 	<b:bean id="authenticationSuccess" class="com.zl.bookmark.service.secrity.AuthenticationSuccess" />
 	<b:bean id="authenticationFailure" class="com.zl.bookmark.service.secrity.AuthenticationFailure" />
-	<b:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
+    -->
+    <!-- springSecrity 方法级别的权限控制 global-method-security标签只能定义一个 -->
+    
+    <!-- 启用jsr250定义的安全注解 -->
+    <global-method-security jsr250-annotations="enabled" >
+           <protect-pointcut expression="execution(* com.zl.*Service.*(..))"
+	                     access="isAuthenticated()"/>
+    </global-method-security>
+    <!-- 禁用springSecrity自定义的安全注解 -->
+    <!-- <global-method-security secured-annotations="disabled" /> -->
+    <!-- 禁用基于表达式的安全注解 -->
+    <!-- <global-method-security pre-post-annotations="disabled" /> -->
+    <!-- 基于切面的方法级别的安全控制 
+    <global-method-security>
+       <protect-pointcut expression="execution(* com.zl.*Service.*(..))"
+	                     access="isAuthenticated()"/>
+    </global-method-security>
+    -->
 </b:beans>

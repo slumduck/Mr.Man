@@ -17,13 +17,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationSuccess implements AuthenticationSuccessHandler {
     
-	private static final String defaulSuccesstUrl = "index";
+	private static final String defaulSuccesstUrl = "/index.html";
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request,
 			HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		response.sendRedirect(defaulSuccesstUrl);
+		request.getRequestDispatcher(defaulSuccesstUrl).forward(request, response);
 	}
 
 }
